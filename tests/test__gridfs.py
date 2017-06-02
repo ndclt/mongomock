@@ -27,7 +27,7 @@ import time
 @skipIf(not _HAVE_PYMONGO, "pymongo not installed")
 @skipIf(not _HAVE_GRIDFS, "gridfs not installed")
 class GridFsTest(TestCase):
-    
+
     def setUp(self):
         super(GridFsTest, self).setUp()
         self.fake_conn = mongomock.MongoClient()

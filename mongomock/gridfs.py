@@ -1,6 +1,8 @@
 
 def enable_gridfs_integration():
-    """
+
+    """This function enables the use of mongomock Database's and Collection's inside gridfs
+
     Gridfs library use `isinstance` to make sure the passed elements
     are valid `pymongo.Database/Collection`. Hence we have to monkeypatch
     isinstance behaviour to also accept `mongomock.Database/Collection`.
