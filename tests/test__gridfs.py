@@ -1,11 +1,12 @@
 
 import mongomock
-from mongomock.gridfs import MockGridFS
+import mongomock.gridfs
 from nose.tools import assert_raises
 from unittest import TestCase, skipIf
 try:
     import gridfs
     _HAVE_GRIDFS = True
+    mongomock.gridfs.enable_gridfs_integration()
 except ImportError:
     _HAVE_GRIDFS = False
 
@@ -26,7 +27,7 @@ import time
 @skipIf(not _HAVE_PYMONGO, "pymongo not installed")
 @skipIf(not _HAVE_GRIDFS, "gridfs not installed")
 class GridFsTest(TestCase):
-
+    
     def setUp(self):
         super(GridFsTest, self).setUp()
         self.fake_conn = mongomock.MongoClient()
@@ -37,7 +38,7 @@ class GridFsTest(TestCase):
         self.mongo_conn[self.db_name]["fs"]["chunks"].remove()
 
         self.real_gridfs = gridfs.GridFS(self.mongo_conn[self.db_name])
-        self.fake_gridfs = MockGridFS(self.fake_conn[self.db_name])
+        self.fake_gridfs = gridfs.GridFS(self.fake_conn[self.db_name])
 
     def tearDown(self):
         super(GridFsTest, self).setUp()
